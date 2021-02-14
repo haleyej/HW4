@@ -1,10 +1,10 @@
 import unittest
 
-## Name :
-## Student ID:
-## Your Email:
+## Name : Haley Johnson 
+## Student ID: 2694  6938
+## Your Email: haleyej@umich.edu
 ## People you worked with :
-## Github URL :
+## Github URL : https://github.com/haleyej/HW4
 
 ### Customer Class
 class Customer:
@@ -21,7 +21,7 @@ class Customer:
 
 	# Pays the server
 	def make_order(self, server, amount):
-		pass
+		server.receive_payment(server,  amount)
 
 	# Orders food from the truck to be brought to the table by the server,
 	# assuming certain conditions are met.
@@ -90,7 +90,41 @@ class Server:
 ### Create Truck class here
 
 class Truck:
-    pass
+
+    def __init__(self, truck_name, inventory, cost = 7, money = 700):
+	    self.name = truck_name
+	    self.inventory = inventory
+	    self.cost = cost
+	    self.money = money
+		
+
+    def process_order(self, food_item, quantity):
+        if self.has_food(food_item, quantity):
+	        self.inventory -= quantit
+            self.money += (quantity * self.cost)
+
+    def has_food(self, food_item, quantity):
+        in_inventory = self.inventory[food_item]
+		if quantity >= in_inventory:
+			return True
+
+	def stock_up(self,  food_item, quantity):
+		self.inventory[food_item] = self.inventory.get(food_item, 0) + quantity
+
+	def __str__(self):
+		return f"Hello, we are {self.name}. This is our current menu {list(self.inventory.keys())}. We charge ${self.cost} per item. we have ${self.money}  in total."
+
+def Main():
+	inventory1 = {"Milkshake": 9, "Fries": 12, "Burgers":16}
+	inventory2 = {"Salad": 10, "Smoothie": 14, "Omlette":17}
+	customer1 = Customer('Haley', 150.0)
+	customer2 = Customer('Zach', 70.0)
+	truck1  = Truck('American  Diner Truck', inventory1, cost = 5,  money = 1000)
+	truck2 = Truck('Health Food to Go', inventory2, cost = 8.50, money = 650)
+	server1 = Server('Anna',  money = 150, food_trucks  = [truck1], service_fee = 4.00)
+	server2 =  Server('Andrew', money = 300, food_trucks = [truck1,  truck2], service_fee = 6.50)
+	customer1.order_food(server1, truck1, "Fries", 5)
+	customer2.order_food(server2, trucky2,  "Smoothie", 10)
 
 
 class TestAllMethods(unittest.TestCase):
